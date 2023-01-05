@@ -1,0 +1,24 @@
+html{
+    border-style: none;
+    margin: 0;
+	padding: 0;
+	border: 0;
+}
+h1 {
+    text-align: center;
+    color: #fff;
+}
+
+#mode {
+    float: right;
+}
+
+header {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    background-color: steelblue;
+    height: 100px;
+    padding: 10px;
+    box-shadow: 0 5px 15px;
+}
