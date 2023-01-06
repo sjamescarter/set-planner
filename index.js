@@ -41,26 +41,41 @@ function songSearchHandler() {
 
         const searchBy = songSearchBar[0].value
         const searchText = songSearchBar[1].value
-
+        const clearSongs = document.querySelector('#song-list')
+        clearSongs.innerHTML = ""
+        
         get(songsURL, searchBy, searchText)
 
         songSearchBar.reset();
     })
 }
 
+// Callback Functions
+
 function get(URL, searchBy, searchText) {
     fetch(URL)
     .then(response => response.json())
     .then(data => data.forEach((element) => {
-        if(element[searchBy] === searchText)
-        populate(element)
-        }))
+        if(element[searchBy] === searchText){
+            populate(element)
+        }}))
     .catch(error => alert(error))
 }
 
 function populate(song) {
     const songList = document.querySelector('#song-list')
-    const newSong = document.createElement('li')
-    newSong.textContent = song.title
+    const newSong = createSongCard(song)
     songList.appendChild(newSong)
+}
+
+function createSongCard(song) {
+    const songCard = document.createElement('li')
+    songCard.innerHTML = `
+    <h3></h3>
+    <button>+</button>
+    `
+    songCard.querySelector('h3').textContent = song.title
+    //songCard.querySelector('h3').addEventListener('click', editSong)
+    //songCard.querySelector('button').addEventListener('click', addToList)
+    return songCard
 }

@@ -4,9 +4,14 @@ html {
 	padding: 0;
 	border: 0;
 }
+
 h1 {
     text-align: center;
     color: #fff;
+}
+
+h3 {
+    margin: 0;
 }
 
 #mode {
@@ -29,3 +34,19 @@ header {
     width: 50%;
 }
 
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 10px;
+    max-width: 80%;
+}
+
+li {
+    padding: 10px;
+    margin: 0px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+}
