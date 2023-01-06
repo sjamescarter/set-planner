@@ -22,3 +22,9 @@ header {
     padding: 10px;
     box-shadow: 0 5px 15px;
 }
+
+.plan {
+    display: block;
+    float: left;
+    width: 50%;
+}
