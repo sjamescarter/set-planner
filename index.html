@@ -17,9 +17,32 @@
        </header> 
        <main>
         <div id="wrapper">
-            <div id="search-bar" class="plan"></div>
-            <div id="songs" class="plan"></div>
-            <div id="sets" class="plan"></div>
+            <div id="songs" class="plan">
+                <h2>Songs</h2>
+                <form id="song-search">
+                    <select name="search-by">
+                        <option value="title">Title</option>
+                        <option value="author">Author</option>
+                        <option value="key">Key</option>
+                        <option value="meter">Meter</option>
+                    </select>
+                    <input type="text" name="song-search" placeholder="Song Title" />
+                    <input type="submit" value="Search" />
+                </form>
+                <ul id="song-list"></ul>
+            </div>
+            <div id="sets" class="plan">
+                <h2>Sets</h2>
+                <form id="set-search">
+                    <select name="search-by">
+                        <option value="date">Date</option>
+                        <option value="venue">Venue</option>
+                    </select>
+                    <input type="text" name="set-search" placeholder="Date" />
+                    <input type="submit" value="Search" />
+                </form>
+                <ul id="set-list"></ul>
+            </div>
             <div id="live" class="live"></div>
         </div>
        </main>
