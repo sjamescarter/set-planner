@@ -1,11 +1,12 @@
 document.addEventListener('DOMContentLoaded', init)
 
+const dbURL = "http://localhost:3000/"
 const songsURL = "http://localhost:3000/songs"
 const setsURL = "http://localhost:3000/sets"
 
 function init() {
     modeHandler()
-    songSearchHandler()
+    searchHandler()
     // setSearchHandler()
     // populateSongs()
     // populateSets()
@@ -33,21 +34,22 @@ function modeHandler(){
     })
 }
 
-function songSearchHandler() {
-    const songSearchBar = document.querySelector('#song-search')
+function searchHandler() {
+    const searchBar = document.querySelectorAll('form')
 
-    songSearchBar.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const container = e.target.parentNode
-        const searchBy = songSearchBar[0].value
-        const searchText = songSearchBar[1].value
-        const clearSongs = document.querySelector('#song-list')
-        clearSongs.innerHTML = ""
-        
-        get(songsURL, searchBy, searchText, container)
-
-        songSearchBar.reset();
-    })
+    searchBar.forEach((element) => {
+        element.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const container = e.target.parentNode
+            const searchBy = e.target[0].value
+            const searchText = e.target[1].value
+            const clearUl = e.target.parentNode.querySelector('ul')
+            clearUl.innerHTML = ""
+            
+            get(`http://localhost:3000/${e.target.parentNode.id}`, searchBy, searchText, container)
+    
+            e.target.reset();
+    })})
 }
 
 // Callback Functions
