@@ -38,13 +38,13 @@ function songSearchHandler() {
 
     songSearchBar.addEventListener('submit', (e) => {
         e.preventDefault();
-
+        const container = e.target.parentNode
         const searchBy = songSearchBar[0].value
         const searchText = songSearchBar[1].value
         const clearSongs = document.querySelector('#song-list')
         clearSongs.innerHTML = ""
         
-        get(songsURL, searchBy, searchText)
+        get(songsURL, searchBy, searchText, container)
 
         songSearchBar.reset();
     })
@@ -52,23 +52,22 @@ function songSearchHandler() {
 
 // Callback Functions
 
-function get(URL, searchBy, searchText) {
+function get(URL, searchBy, searchText, container) {
     fetch(URL)
     .then(response => response.json())
     .then(data => data.forEach((element) => {
         if(element[searchBy] === searchText){
-            populate(element)
+            populate(element, container)
         }}))
     .catch(error => alert(error))
 }
 
-function populate(song) {
-    const songList = document.querySelector('#song-list')
-    const newSong = createSongCard(song)
-    songList.appendChild(newSong)
+function populate(element, container) {
+    const newItem = createCard(element)
+    container.querySelector('ul').appendChild(newItem)
 }
 
-function createSongCard(song) {
+function createCard(song) {
     const songCard = document.createElement('li')
     songCard.innerHTML = `
     <h3></h3>
