@@ -12,9 +12,13 @@ function init() {
     // populateSets()
 }
 
+// function populateSongs() {
+//     fetch(son)
+// }
+
 // Handler Functions
 
-function modeHandler(){
+function modeHandler() {
     const select = document.querySelector('#mode')
     const plan = document.querySelectorAll('.plan')
     const live = document.querySelector('.live')
@@ -44,6 +48,7 @@ function searchHandler() {
             const container = e.target.parentNode
             const searchBy = e.target[0].value
             const searchText = e.target[1].value
+            console.log(searchText)
             // const clearUl = e.target.parentNode.querySelector('ul')
             // clearUl.innerHTML = ""
             
@@ -67,7 +72,10 @@ function get(URL, searchBy, searchText, container) {
     .then(data => data.forEach((element) => {
         if(element[searchBy] === searchText){
             populate(element, container)
-        }}))
+        } else if(searchText === "") {
+            populate(element, container)
+        }
+    })) 
     .catch(error => alert(error))
 }
 
