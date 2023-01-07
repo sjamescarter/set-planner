@@ -1,20 +1,15 @@
 document.addEventListener('DOMContentLoaded', init)
 
 const dbURL = "http://localhost:3000/";
-const songsURL = "http://localhost:3000/songs";
-const setsURL = "http://localhost:3000/sets";
 let activeSet;
 
 function init() {
-    modeHandler()
-    searchHandler()
-    // populateSongs()
-    // populateSets()
+    modeHandler();
+    searchHandler();
+    document.getElementById("song-search-button").click();
+    document.getElementById("set-search-button").click();
 }
 
-// function populateSongs() {
-//     fetch(son)
-// }
 
 // Handler Functions
 
@@ -48,11 +43,10 @@ function searchHandler() {
             const container = e.target.parentNode
             const searchBy = e.target[0].value
             const searchText = e.target[1].value
-            console.log(searchText)
             // const clearUl = e.target.parentNode.querySelector('ul')
             // clearUl.innerHTML = ""
             
-            get(`http://localhost:3000/${e.target.parentNode.id}`, searchBy, searchText, container)
+            get(dbURL + container.id, searchBy, searchText, container)
     
             e.target.reset();
     })})
