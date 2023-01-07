@@ -7,7 +7,6 @@ const setsURL = "http://localhost:3000/sets"
 function init() {
     modeHandler()
     searchHandler()
-    // setSearchHandler()
     // populateSongs()
     // populateSets()
 }
@@ -73,6 +72,7 @@ function populate(element, container) {
 
 function createSongCard(song) {
     const songCard = document.createElement('li')
+    songCard.id = `song-${song.id}`
     songCard.innerHTML = `
     <h3></h3>
     <button>+</button>
@@ -85,13 +85,17 @@ function createSongCard(song) {
 
 function createSetCard(set) {
     const setCard = document.createElement('li')
+    setCard.id = `set-${set.id}`
     setCard.innerHTML = `
     <h3></h3>
     <h5></h5>
     `
     setCard.querySelector('h3').textContent = set.venue
     setCard.querySelector('h5').textContent = set.date
-    //setCard.addEventListener('click', editSet)
+    setCard.querySelector('h3').addEventListener('click', editSet)
     return setCard
 }
 
+function editSet(e) {
+    console.log(e.target.parentNode.id)
+}
