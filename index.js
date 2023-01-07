@@ -102,20 +102,45 @@ function createSetCard(set) {
     return setCard
 }
 
-// function editSet(e) {
-//     clearHandler(e)
+function editSet(e) {
+    const setId = e.target.parentNode.id
+    const editBox = document.querySelector('#set-list')
+    editBox.innerHTML = `
+    <div id="${setId}">
+    <h3></h3>
+    <h5></h5>
+    <ol></ol>
+    <button>Save</button>
+    <button>Delete</button>
+    </div>
+    `
+    fetch(dbURL + setId)
+    .then(response => response.json())
+    .then(data => {
+        editBox.querySelector('h3').textContent = data.venue
+        editBox.querySelector('h5').textContent = data.date
+        data.songs.forEach((songId) => displaySong(songId))
+    })
+    .catch(error => alert(error))
+    activeSet = editBox
+}
 
-//     //activeSet = e.target.parentNode
-// }
+function addToSet(e) {
+    const songId = e.target.parentNode.id
+    fetch(`${dbURL}${songId}`)
+    .then(response => response.json())
+    .then(data => displaySong(data))
+    .catch(error => alert("Whoops! You need to select a set first."))
+}
 
-// function addToSet(e) {
-//     const songId = e.target.parentNode.id
-//     fetch(`${dbURL}${songId}`)
-//     .then(response => response.json())
-//     .then(data => {
-//         const newSong = document.createElement('p')
-//         newSong.textContent = data.title
-//         activeSet.appendChild(newSong)
-//     })
-//     .catch(error => alert(error))
-// }
+function displaySong(data) {
+    const newSong = document.createElement('li')
+    newSong.innerHTML = `
+    <h4 id=${data.id}></h4>
+    <p></p>
+    `
+    newSong.querySelector('h4').textContent = data.title
+    newSong.querySelector('p').textContent = data.key + " " + data.meter
+    activeSet.querySelector('ol').appendChild(newSong)
+    console.log(newSong.querySelector('h4').num)
+}
