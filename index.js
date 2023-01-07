@@ -52,6 +52,7 @@ function searchHandler() {
     })})
 }
 
+
 // Callback Functions
 
 function get(URL, searchBy, searchText, container) {
@@ -65,11 +66,12 @@ function get(URL, searchBy, searchText, container) {
 }
 
 function populate(element, container) {
-    const newItem = createCard(element)
+    let newItem;
+    container.id === 'songs' ? newItem = createSongCard(element) : newItem = createSetCard(element)
     container.querySelector('ul').appendChild(newItem)
 }
 
-function createCard(song) {
+function createSongCard(song) {
     const songCard = document.createElement('li')
     songCard.innerHTML = `
     <h3></h3>
@@ -80,3 +82,16 @@ function createCard(song) {
     //songCard.querySelector('button').addEventListener('click', addToList)
     return songCard
 }
+
+function createSetCard(set) {
+    const setCard = document.createElement('li')
+    setCard.innerHTML = `
+    <h3></h3>
+    <h5></h5>
+    `
+    setCard.querySelector('h3').textContent = set.venue
+    setCard.querySelector('h5').textContent = set.date
+    //setCard.addEventListener('click', editSet)
+    return setCard
+}
+

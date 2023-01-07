@@ -10,7 +10,7 @@ h1 {
     color: #fff;
 }
 
-h3 {
+h3 h5 {
     margin: 0;
 }
 
@@ -43,7 +43,7 @@ ul {
 
 li {
     padding: 10px;
-    margin: 0px;
+    margin: 0;
     border-style: solid;
     border-color: black;
     border-radius: 20px;
