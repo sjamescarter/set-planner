@@ -7,6 +7,22 @@
       "key": "G",
       "meter": "4/4",
       "chordchartURL": "https://pnwchords.com/10000-reasons-bless-the-lord-matt-redman/"
+    },
+    {
+      "id": 2,
+      "title": "Abba",
+      "author": "Jonathan David and Melissa Helser",
+      "key": "G",
+      "meter": "4/4",
+      "chordchartURL": "https://tabs.ultimate-guitar.com/tab/jonathan-david-melissa-helser/abba-chords-1688245"
+    },
+    {
+      "id": 3,
+      "title": "Build My Life",
+      "author": "Brett Younker, Karl Martin, Kirby Kable, Matt Redman, and Pat Barrett",
+      "key": "G",
+      "meter": "4/4",
+      "chordchartURL": "https://www.worshipchords.net/guitar/pat-barrett/build-my-life"
     }
   ],
   "sets": [
@@ -15,10 +31,7 @@
       "venue": "Woodstock AG",
       "date": "2023-01-08",
       "songs": [
-        "songs/1",
-        "songs/1",
-        "songs/1",
-        "songs/1"
+        "songs/3"
       ]
     }
   ]

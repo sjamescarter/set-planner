@@ -57,6 +57,12 @@ function clearHandler(e) {
     clearUl.innerHTML = ""
 }
 
+function deleteSong(e) {
+    const song = e.target.parentNode
+    song.parentNode.removeChild(song)
+    updateSet1()
+}
+
 // Callback Functions
 
 
@@ -112,7 +118,7 @@ function editSet(e) {
     <div id="${setId}">
     <h3></h3>
     <h5></h5>
-    <ol></ol>
+    <ul></ul>
     <button id='delete'>Delete Set</button>
     </div>
     `
@@ -139,10 +145,12 @@ function displaySong(data) {
     newSong.innerHTML = `
     <h4 id="${data.id}"></h4>
     <p></p>
+    <button>-</button>
     `
     newSong.querySelector('h4').textContent = data.title
     newSong.querySelector('p').textContent = data.key + " " + data.meter
-    activeSet.querySelector('ol').appendChild(newSong)
+    newSong.querySelector('button').addEventListener('click', deleteSong)
+    activeSet.querySelector('ul').appendChild(newSong)
 }
 
 function updateSet(e) {
@@ -153,7 +161,27 @@ function updateSet(e) {
     console.log(songs)
     const setId = activeSet.querySelector('div').id
     
-    activeSet.querySelector('ol').innerHTML = ""
+    activeSet.querySelector('ul').innerHTML = ""
+
+    fetch(dbURL + setId, {
+        method: "PATCH",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify({
+            songs: songs
+        })
+    })
+    .then(response => response.json())
+    .then(data => data.songs.forEach((id) => addToSet(id)))
+}
+
+function updateSet1() {
+    const songs = []
+    activeSet.querySelectorAll('h4').forEach((element) => songs.push(`songs/${element.id}`))
+    const setId = activeSet.querySelector('div').id
+    
+    activeSet.querySelector('ul').innerHTML = ""
 
     fetch(dbURL + setId, {
         method: "PATCH",
