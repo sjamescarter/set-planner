@@ -64,9 +64,11 @@ function createNewSet(e) {
     <label for="date">Date</label><br>
     <input type="date" name="date" class="info" /><br>
     <label for="venue">Venue</label><br>
-    <input type="text" name="venue" class="info" /><br><br>
+    <input type="text" name="venue" class="info" /><br>
+    <input type="hidden" name="songs" class="info" value="[]"<br>
     <input type="submit" value="Submit"/>
     `
+    newSetForm.addEventListener('submit', makeObject)
     const editBox = document.querySelector('#set-list')
     editBox.appendChild(newSetForm)
 }
