@@ -6,10 +6,32 @@ let activeSet;
 function init() {
     modeHandler();
     searchHandler();
+    document.getElementById("new-song").addEventListener('click', createNewSong);
+    //document.getElementById("new-set").addEventListener('click', createNewSet);
     document.getElementById("song-search-button").click();
     document.getElementById("set-search-button").click();
+
 }
 
+function createNewSong(e) {
+    clearHandler(e)
+    const newSongForm = document.createElement('form')
+    newSongForm.innerHTML = `
+    <label for="title">Song Title</label><br>
+    <input type="text" name="title" /><br>
+    <label for="author">Author</label><br>
+    <input type="text" name="author" /><br>
+    <label for="key">Key</label><br>
+    <input type="text" name="key" /><br>
+    <label for="meter">Meter</label><br>
+    <input type="text" name="meter" /><br>
+    <label for="chords">Chord Chart URL</label><br>
+    <input type="text" name="chords" /><br><br>
+    <input type="submit" value="Save"/>
+    `
+    const editBox = document.querySelector('#song-list')
+    editBox.appendChild(newSongForm)
+}
 
 // Handler Functions
 
@@ -114,6 +136,7 @@ function createSetCard(set) {
     return setCard
 }
 
+// These functions are for editing sets including adding songs, deleting songs or the set itself.
 function editSet(e) {
     const setId = e.target.parentNode.id
     const editBox = document.querySelector('#set-list')
@@ -166,6 +189,14 @@ function addSong(e) {
     updateSet(songs)
 }
 
+function deleteSong(e) {
+    const song = e.target.parentNode
+    song.parentNode.removeChild(song)
+    const songs = []
+    activeSet.querySelectorAll('h4').forEach((element) => songs.push(`songs/${element.id}`))
+    updateSet(songs)
+}
+
 function updateSet(songs) {
     const setId = activeSet.querySelector('div').id
     activeSet.querySelector('ul').innerHTML = ""
@@ -181,12 +212,4 @@ function updateSet(songs) {
     })
     .then(response => response.json())
     .then(data => data.songs.forEach((id) => getSong(id)))
-}
-
-function deleteSong(e) {
-    const song = e.target.parentNode
-    song.parentNode.removeChild(song)
-    const songs = []
-    activeSet.querySelectorAll('h4').forEach((element) => songs.push(`songs/${element.id}`))
-    updateSet(songs)
 }
