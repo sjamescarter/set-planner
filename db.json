@@ -31,7 +31,11 @@
       "venue": "Woodstock AG",
       "date": "2023-01-08",
       "songs": [
-        "songs/3"
+        "songs/1",
+        "songs/2",
+        "songs/3",
+        "songs/1",
+        "songs/1"
       ]
     }
   ]

@@ -60,7 +60,7 @@ function clearHandler(e) {
 function deleteSong(e) {
     const song = e.target.parentNode
     song.parentNode.removeChild(song)
-    updateSet1()
+    updateSet()
 }
 
 // Callback Functions
@@ -94,7 +94,7 @@ function createSongCard(song) {
     `
     songCard.querySelector('h3').textContent = song.title
     //songCard.querySelector('h3').addEventListener('click', editSong)
-    songCard.querySelector('button').addEventListener('click', updateSet)
+    songCard.querySelector('button').addEventListener('click', addSong)
     return songCard
 }
 
@@ -127,13 +127,13 @@ function editSet(e) {
     .then(data => {
         editBox.querySelector('h3').textContent = data.venue
         editBox.querySelector('h5').textContent = data.date
-        data.songs.forEach((songId) => addToSet(songId))
+        data.songs.forEach((songId) => getSong(songId))
     })
     .catch(error => alert(error))
     activeSet = editBox
 }
 
-function addToSet(songId) {
+function getSong(songId) {
     fetch(`${dbURL}${songId}`)
     .then(response => response.json())
     .then(data => displaySong(data))
@@ -153,34 +153,17 @@ function displaySong(data) {
     activeSet.querySelector('ul').appendChild(newSong)
 }
 
-function updateSet(e) {
+function addSong(e) {
     const songs = []
     activeSet.querySelectorAll('h4').forEach((element) => songs.push(`songs/${element.id}`))
     const songId = e.target.parentNode.id
     songs.push(songId)
+    updateSet(songs)
     console.log(songs)
-    const setId = activeSet.querySelector('div').id
-    
-    activeSet.querySelector('ul').innerHTML = ""
-
-    fetch(dbURL + setId, {
-        method: "PATCH",
-        headers: {
-            "Content-type": "application/json"
-        },
-        body: JSON.stringify({
-            songs: songs
-        })
-    })
-    .then(response => response.json())
-    .then(data => data.songs.forEach((id) => addToSet(id)))
 }
 
-function updateSet1() {
-    const songs = []
-    activeSet.querySelectorAll('h4').forEach((element) => songs.push(`songs/${element.id}`))
+function updateSet(songs) {
     const setId = activeSet.querySelector('div').id
-    
     activeSet.querySelector('ul').innerHTML = ""
 
     fetch(dbURL + setId, {
@@ -193,5 +176,5 @@ function updateSet1() {
         })
     })
     .then(response => response.json())
-    .then(data => data.songs.forEach((id) => addToSet(id)))
+    .then(data => data.songs.forEach((id) => getSong(id)))
 }
