@@ -16,32 +16,56 @@ function init() {
 function createNewSong(e) {
     clearHandler(e)
     const newSongForm = document.createElement('form')
+    newSongForm.id = "songs/"
     newSongForm.innerHTML = `
     <label for="title">Song Title</label><br>
-    <input type="text" name="title" /><br>
+    <input type="text" name="title" class="info"/><br>
     <label for="author">Author</label><br>
-    <input type="text" name="author" /><br>
+    <input type="text" name="author" class="info" /><br>
     <label for="key">Key</label><br>
-    <input type="text" name="key" placeholder="C" /><br>
+    <input type="text" name="key" class="info" placeholder="C" /><br>
     <label for="meter">Meter</label><br>
-    <input type="text" name="meter" placeholder="4/4" /><br>
+    <input type="text" name="meter" class="info" placeholder="4/4" /><br>
     <label for="chords">Chord Chart URL</label><br>
-    <input type="text" name="chords" placeholder="http://..." /><br><br>
-    <input type="submit" value="Save"/>
+    <input type="text" name="chords" class="info" placeholder="http://..." /><br><br>
+    <input type="submit" value="Submit"/>
     `
+    newSongForm.addEventListener('submit', makeObject)
     const editBox = document.querySelector('#song-list')
     editBox.appendChild(newSongForm)
+}
+
+function makeObject(e){
+    e.preventDefault()
+    const form = e.target
+    const info = form.querySelectorAll('.info')
+    const container = form.parentNode.parentNode
+    const newObj = {}
+    info.forEach((element) => newObj[element.name] = element.value)
+    form.parentNode.removeChild(form)
+    
+    fetch(`${dbURL}${container.id}/`, {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(newObj)
+    })
+    .then(response => response.json())
+    .then(data => populate(data, container))
+    .catch(error => alert(error))
 }
 
 function createNewSet(e) {
     clearHandler(e)
     const newSetForm = document.createElement('form')
+    newSetForm.id = "sets/"
     newSetForm.innerHTML = `
     <label for="date">Date</label><br>
-    <input type="date" name="date" /><br>
+    <input type="date" name="date" class="info" /><br>
     <label for="venue">Venue</label><br>
-    <input type="text" name="venue" /><br><br>
-    <input type="submit" value="Save"/>
+    <input type="text" name="venue" class="info" /><br><br>
+    <input type="submit" value="Submit"/>
     `
     const editBox = document.querySelector('#set-list')
     editBox.appendChild(newSetForm)

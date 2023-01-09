@@ -6,7 +6,7 @@
       "author": "Matt Redman",
       "key": "G",
       "meter": "4/4",
-      "chordchartURL": "https://pnwchords.com/10000-reasons-bless-the-lord-matt-redman/"
+      "chords": "https://pnwchords.com/10000-reasons-bless-the-lord-matt-redman/"
     },
     {
       "id": 2,
@@ -14,7 +14,7 @@
       "author": "Jonathan David and Melissa Helser",
       "key": "G",
       "meter": "4/4",
-      "chordchartURL": "https://tabs.ultimate-guitar.com/tab/jonathan-david-melissa-helser/abba-chords-1688245"
+      "chords": "https://tabs.ultimate-guitar.com/tab/jonathan-david-melissa-helser/abba-chords-1688245"
     },
     {
       "id": 3,
@@ -22,7 +22,39 @@
       "author": "Brett Younker, Karl Martin, Kirby Kable, Matt Redman, and Pat Barrett",
       "key": "G",
       "meter": "4/4",
-      "chordchartURL": "https://www.worshipchords.net/guitar/pat-barrett/build-my-life"
+      "chords": "https://www.worshipchords.net/guitar/pat-barrett/build-my-life"
+    },
+    {
+      "title": "Happy Day",
+      "author": "Ben Cantelon, Tim Hughes",
+      "key": "C",
+      "meter": "4/4",
+      "chords": "https://worshipchords.com/happy-day/",
+      "id": 4
+    },
+    {
+      "title": "Goodness of God",
+      "author": "Ed Cash, Jenn Johnson",
+      "key": "C",
+      "meter": "4/4",
+      "chords": "https://pnwchords.com/the-goodness-of-god-bethel-worship/",
+      "id": 5
+    },
+    {
+      "title": "Tremble",
+      "author": "Andres Figueroa, Hank Bentley, Mariah McManus, Mia Fieldes",
+      "key": "D",
+      "meter": "4/4",
+      "chords": "https://pnwchords.com/tremble-mosaic-msc-bethel-worship-cover/",
+      "id": 6
+    },
+    {
+      "title": "You Keep On Getting Better",
+      "author": "Dante Bow, Jonathan Jay, Majesty Rose",
+      "key": "G",
+      "meter": "4/4",
+      "chords": "https://www.worshipchords.net/guitar/maverick-city-music-/you-keep-on-getting-better-feat-majesty-rose",
+      "id": 7
     }
   ],
   "sets": [
@@ -31,7 +63,9 @@
       "venue": "Woodstock AG",
       "date": "01/08/2023",
       "songs": [
-        "songs/2"
+        "songs/2",
+        "songs/3",
+        "songs/5"
       ]
     },
     {
@@ -39,7 +73,9 @@
       "venue": "NCF",
       "date": "01/13/2023",
       "songs": [
-        "songs/2"
+        "songs/1",
+        "songs/3",
+        "songs/6"
       ]
     },
     {
