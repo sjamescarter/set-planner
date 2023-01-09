@@ -7,7 +7,7 @@ function init() {
     modeHandler();
     searchHandler();
     document.getElementById("new-song").addEventListener('click', createNewSong);
-    //document.getElementById("new-set").addEventListener('click', createNewSet);
+    document.getElementById("new-set").addEventListener('click', createNewSet);
     document.getElementById("song-search-button").click();
     document.getElementById("set-search-button").click();
 
@@ -31,6 +31,20 @@ function createNewSong(e) {
     `
     const editBox = document.querySelector('#song-list')
     editBox.appendChild(newSongForm)
+}
+
+function createNewSet(e) {
+    clearHandler(e)
+    const newSetForm = document.createElement('form')
+    newSetForm.innerHTML = `
+    <label for="date">Date</label><br>
+    <input type="date" name="date" /><br>
+    <label for="venue">Venue</label><br>
+    <input type="text" name="venue" /><br><br>
+    <input type="submit" value="Save"/>
+    `
+    const editBox = document.querySelector('#set-list')
+    editBox.appendChild(newSetForm)
 }
 
 // Handler Functions
