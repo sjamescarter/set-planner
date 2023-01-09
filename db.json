@@ -31,11 +31,23 @@
       "venue": "Woodstock AG",
       "date": "2023-01-08",
       "songs": [
-        "songs/1",
-        "songs/2",
-        "songs/3",
-        "songs/1",
-        "songs/1"
+        "songs/2"
+      ]
+    },
+    {
+      "id": 2,
+      "venue": "NCF",
+      "date": "2023-01-13",
+      "songs": [
+        "songs/2"
+      ]
+    },
+    {
+      "id": 3,
+      "venue": "Woodstock AG",
+      "date": "2023-01-15",
+      "songs": [
+        "songs/2"
       ]
     }
   ]

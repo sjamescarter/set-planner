@@ -43,8 +43,6 @@ function searchHandler() {
             const container = e.target.parentNode
             const searchBy = e.target[0].value
             const searchText = e.target[1].value
-            // const clearUl = e.target.parentNode.querySelector('ul')
-            // clearUl.innerHTML = ""
             
             get(dbURL + container.id, searchBy, searchText, container)
     
@@ -57,14 +55,19 @@ function clearHandler(e) {
     clearUl.innerHTML = ""
 }
 
-function deleteSong(e) {
-    const song = e.target.parentNode
-    song.parentNode.removeChild(song)
-    updateSet()
+function deleteHandler(e) {
+    const objToDelete = e.target.parentNode
+    const id = objToDelete.id
+    fetch(dbURL + id, {
+        method: "DELETE",
+        headers: {
+            "Content-type": "application/json"
+    }})
+    .catch(error => alert(error))
+    objToDelete.parentNode.removeChild(objToDelete)
 }
 
 // Callback Functions
-
 
 function get(URL, searchBy, searchText, container) {
     fetch(URL)
@@ -122,6 +125,8 @@ function editSet(e) {
     <button id='delete'>Delete Set</button>
     </div>
     `
+    editBox.querySelector('button').addEventListener('click', deleteHandler)
+
     fetch(dbURL + setId)
     .then(response => response.json())
     .then(data => {
@@ -159,7 +164,6 @@ function addSong(e) {
     const songId = e.target.parentNode.id
     songs.push(songId)
     updateSet(songs)
-    console.log(songs)
 }
 
 function updateSet(songs) {
@@ -177,4 +181,12 @@ function updateSet(songs) {
     })
     .then(response => response.json())
     .then(data => data.songs.forEach((id) => getSong(id)))
+}
+
+function deleteSong(e) {
+    const song = e.target.parentNode
+    song.parentNode.removeChild(song)
+    const songs = []
+    activeSet.querySelectorAll('h4').forEach((element) => songs.push(`songs/${element.id}`))
+    updateSet(songs)
 }
