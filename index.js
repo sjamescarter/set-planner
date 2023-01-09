@@ -22,11 +22,11 @@ function createNewSong(e) {
     <label for="author">Author</label><br>
     <input type="text" name="author" /><br>
     <label for="key">Key</label><br>
-    <input type="text" name="key" /><br>
+    <input type="text" name="key" placeholder="C" /><br>
     <label for="meter">Meter</label><br>
-    <input type="text" name="meter" /><br>
+    <input type="text" name="meter" placeholder="4/4" /><br>
     <label for="chords">Chord Chart URL</label><br>
-    <input type="text" name="chords" /><br><br>
+    <input type="text" name="chords" placeholder="http://..." /><br><br>
     <input type="submit" value="Save"/>
     `
     const editBox = document.querySelector('#song-list')
