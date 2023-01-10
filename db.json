@@ -57,11 +57,11 @@
       "id": 7
     },
     {
-      "title": "yeah",
-      "author": "Keaton Alan Case",
-      "key": "3",
-      "meter": "4/4",
-      "chords": "www.",
+      "title": "Hallelujah",
+      "author": "Lenard Cohen",
+      "key": "",
+      "meter": "",
+      "chords": "",
       "id": 8
     }
   ],
@@ -69,7 +69,7 @@
     {
       "id": 1,
       "venue": "Woodstock AG",
-      "date": "01/08/2023",
+      "date": "2023-01-08",
       "songs": [
         "songs/2",
         "songs/3",
@@ -79,7 +79,7 @@
     {
       "id": 2,
       "venue": "NCF",
-      "date": "01/13/2023",
+      "date": "2023-01-13",
       "songs": [
         "songs/1",
         "songs/3",
@@ -89,28 +89,14 @@
     {
       "id": 3,
       "venue": "Woodstock AG",
-      "date": "01/15/2023",
-      "songs": [
-        "songs/2"
-      ]
+      "date": "2023-01-15",
+      "songs": []
     },
     {
       "date": "2023-01-22",
       "venue": "Woodstock AG",
       "songs": "[]",
       "id": 4
-    },
-    {
-      "date": "2023-01-09",
-      "venue": "Woodstock AG",
-      "songs": [
-        "songs/1",
-        "songs/2",
-        "songs/3",
-        "songs/5",
-        "songs/6"
-      ],
-      "id": 5
     }
   ]
 }

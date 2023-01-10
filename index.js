@@ -154,11 +154,11 @@ function createSongCard(song) {
     const songCard = document.createElement('li')
     songCard.id = `songs/${song.id}`
     songCard.innerHTML = `
-    <h3></h3>
+    <h3 class="cursor"></h3>
     <button>+</button>
     `
     songCard.querySelector('h3').textContent = song.title
-    //songCard.querySelector('h3').addEventListener('click', editSong)
+    songCard.querySelector('h3').addEventListener('click', editSong)
     songCard.querySelector('button').addEventListener('click', addSong)
     return songCard
 }
@@ -176,7 +176,7 @@ function createSetCard(set) {
     return setCard
 }
 
-// These functions are for editing sets including adding songs, deleting songs or the set itself.
+// Edit set functions
 function editSet(e) {
     const setId = e.target.parentNode.id
     const editBox = document.querySelector('#set-list')
@@ -197,7 +197,7 @@ function editSet(e) {
         editBox.querySelector('h5').textContent = data.date
         data.songs.forEach((songId) => getSong(songId))
     })
-    .catch(error => alert(error))
+    //.catch(error => alert(error))
     activeSet = editBox
 }
 
@@ -252,4 +252,66 @@ function updateSet(songs) {
     })
     .then(response => response.json())
     .then(data => data.songs.forEach((id) => getSong(id)))
+}
+
+// Edit song functions
+
+function editSong(e) {
+    const songId = e.target.parentNode.id
+    const editBox = document.querySelector('#song-list')
+    editBox.innerHTML = `
+    <div id="${songId}">
+    <h3 id="title" name="Title" class="cursor"></h3>
+    <h5 id="author" class="cursor"></h5>
+    <p id="key" class="cursor"></p>
+    <p id="meter" class="cursor"></p>
+    <p id="chords" class="cursor"></p>
+    <button id='delete'>Delete Song</button>
+    </div>
+    `
+    editBox.querySelector('h3').addEventListener('click', edit)
+    editBox.querySelector('h5').addEventListener('click', edit)
+    editBox.querySelectorAll('p').forEach(p => p.addEventListener('click', edit))
+    editBox.querySelector('button').addEventListener('click', deleteHandler)
+
+    fetch(dbURL + songId)
+    .then(response => response.json())
+    .then(data => {
+        editBox.querySelector('h3').textContent = data.title
+        editBox.querySelector('h5').textContent = data.author
+        editBox.querySelector('#key').textContent = data.key
+        editBox.querySelector('#meter').textContent = data.meter
+        editBox.querySelector('#chords').textContent = data.chords
+    })
+    //.catch(error => alert(error))
+}
+
+function edit(e) {
+    const editItem = e.target
+    const songId = editItem.parentNode.id
+    const currentText = editItem.textContent
+    editItem.innerHTML = `
+    <form>
+    <label for="${editItem.id}">${editItem.id}</label>
+    <input id="new-text" type="text" name="${editItem.id}" placeholder="${currentText}" />
+    <input type="submit" value="Save" />
+    </form>
+    `
+    const updateText = editItem.querySelector('#new-text').value
+    editItem.querySelector('form').addEventListener('click', updateSong)
+    // fetch(dbURL + songId, {
+    //     method: "PATCH",
+    //     headers: {
+    //         "Content-type": "application/json"
+    //     },
+    //     body: JSON.stringify({
+    //         songs: songs
+    //     })
+    // })
+    // .then(response => response.json())
+    // .then(data => data.songs.forEach((id) => getSong(id)))
+}
+
+function updateSong(e) {
+    console.log(e.target)
 }
