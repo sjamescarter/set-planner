@@ -4,7 +4,7 @@ const dbURL = "http://localhost:3000/";
 let activeSet, activeSong;
 
 function init() {
-    modeHandler();
+    // modeHandler();
     searchHandler();
     document.getElementById("new-song").addEventListener('click', createNewSong);
     document.getElementById("new-set").addEventListener('click', createNewSet);
@@ -53,25 +53,25 @@ function createNewSet(e) {
 
 // Handler Functions
 
-function modeHandler() {
-    const select = document.querySelector('#mode')
-    const plan = document.querySelectorAll('.plan')
-    const live = document.querySelector('.live')
+// function modeHandler() {
+//     const select = document.querySelector('#mode')
+//     const plan = document.querySelectorAll('.plan')
+//     const live = document.querySelector('.live')
     
-    select.addEventListener('change', () => {
-        if(select.value === "live") {
-            plan.forEach(element => {
-                element.style.display = "none"                
-            });
-            live.style.display = "block"
-        } else {
-            plan.forEach(element => {
-                element.style.display = "block"                
-            });
-            live.style.display = "none"
-        }
-    })
-}
+//     select.addEventListener('change', () => {
+//         if(select.value === "live") {
+//             plan.forEach(element => {
+//                 element.style.display = "none"                
+//             });
+//             live.style.display = "block"
+//         } else {
+//             plan.forEach(element => {
+//                 element.style.display = "block"                
+//             });
+//             live.style.display = "none"
+//         }
+//     })
+// }
 
 function searchHandler() {
     const searchBar = document.querySelectorAll('form')
@@ -270,17 +270,20 @@ function createEditWindow(song) {
     <button id='delete'>Delete Song</button>
     </div>
     `
+
     editBox.querySelector('h3').textContent = song.title
     editBox.querySelector('h5').textContent = song.author
     editBox.querySelector('#key').textContent = song.key
     editBox.querySelector('#meter').textContent = song.meter
     editBox.querySelector('#chords').textContent = song.chords
+
     editBox.querySelector('h3').addEventListener('click', edit)
     editBox.querySelector('h5').addEventListener('click', edit)
     editBox.querySelectorAll('p').forEach(p => p.addEventListener('click', edit))
     editBox.querySelector('#done').addEventListener('click', done)
     editBox.querySelector('#add').addEventListener('click', addSong)
     editBox.querySelector('#delete').addEventListener('click', deleteHandler)
+    
     activeSong = editBox
 }
 
