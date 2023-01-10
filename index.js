@@ -64,14 +64,12 @@ function createNewSet(e) {
     <label for="date">Date</label><br>
     <input type="date" name="date" class="info" /><br>
     <label for="venue">Venue</label><br>
-    <input type="text" name="venue" class="info" required/><br>
-    
+    <input type="text" name="venue" class="info" required/><br><br>
     <input type="submit" value="Submit"/>
     `
     newSetForm.addEventListener('submit', makeObject)
     const editBox = document.querySelector('#set-list')
     editBox.appendChild(newSetForm)
-    // <input type="hidden" name="songs" class="info" value="[]"/><br></br>
 }
 
 // Handler Functions
@@ -186,10 +184,12 @@ function editSet(e) {
     <h3></h3>
     <h5></h5>
     <ul></ul>
+    <button id='done'>Done</button>
     <button id='delete'>Delete Set</button>
     </div>
     `
-    editBox.querySelector('button').addEventListener('click', deleteHandler)
+    editBox.querySelector('#done').addEventListener('click', done)
+    editBox.querySelector('#delete').addEventListener('click', deleteHandler)
 
     fetch(dbURL + setId)
     .then(response => response.json())
@@ -267,13 +267,17 @@ function editSong(e) {
     <p id="key" class="cursor"></p>
     <p id="meter" class="cursor"></p>
     <p id="chords" class="cursor"></p>
+    <button id='done'>Done</button>
+    <button id='add'>Add to Set</button>
     <button id='delete'>Delete Song</button>
     </div>
     `
     editBox.querySelector('h3').addEventListener('click', edit)
     editBox.querySelector('h5').addEventListener('click', edit)
     editBox.querySelectorAll('p').forEach(p => p.addEventListener('click', edit))
-    editBox.querySelector('button').addEventListener('click', deleteHandler)
+    editBox.querySelector('#done').addEventListener('click', done)
+    editBox.querySelector('#add').addEventListener('click', addSong)
+    editBox.querySelector('#delete').addEventListener('click', deleteHandler)
 
     fetch(dbURL + songId)
     .then(response => response.json())
@@ -331,13 +335,17 @@ function createEditWindow(song) {
     <p id="key" class="cursor"></p>
     <p id="meter" class="cursor"></p>
     <p id="chords" class="cursor"></p>
+    <button id='done'>Done</button>
+    <button id='add'>Add to Set</button>
     <button id='delete'>Delete Song</button>
     </div>
     `
     editBox.querySelector('h3').addEventListener('click', edit)
     editBox.querySelector('h5').addEventListener('click', edit)
     editBox.querySelectorAll('p').forEach(p => p.addEventListener('click', edit))
-    editBox.querySelector('button').addEventListener('click', deleteHandler)
+    editBox.querySelector('#done').addEventListener('click', done)
+    editBox.querySelector('#add').addEventListener('click', addSong)
+    editBox.querySelector('#delete').addEventListener('click', deleteHandler)
 
     fetch(dbURL + songId)
     .then(response => response.json())
@@ -350,4 +358,10 @@ function createEditWindow(song) {
     })
     //.catch(error => alert(error))
     activeSong = editBox
+}
+
+function done(e) {
+    const songSearch = document.querySelector('#song-search-button')
+    const setSearch = document.querySelector('#set-search-button')
+    e.target.parentNode.parentNode.id === "song-list" ? songSearch.click() : setSearch.click()
 }
