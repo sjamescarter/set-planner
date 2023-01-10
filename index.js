@@ -21,13 +21,13 @@ function createNewSong(e) {
     <label for="title">Song Title</label><br>
     <input type="text" name="title" class="info" required /><br>
     <label for="author">Author</label><br>
-    <input type="text" name="author" class="info" /><br>
+    <input type="text" name="author" class="info" required /><br>
     <label for="key">Key</label><br>
-    <input type="text" name="key" class="info" placeholder="C" /><br>
+    <input type="text" name="key" class="info" value="C" /><br>
     <label for="meter">Meter</label><br>
-    <input type="text" name="meter" class="info" placeholder="4/4" /><br>
+    <input type="text" name="meter" class="info" value="4/4" /><br>
     <label for="chords">Chord Chart URL</label><br>
-    <input type="text" name="chords" class="info" placeholder="http://..." /><br><br>
+    <input type="text" name="chords" class="info" value="http://" /><br><br>
     <input type="submit" value="Submit"/>
     `
     newSongForm.addEventListener('submit', makeObject)
@@ -158,6 +158,7 @@ function createSetCard(set) {
 }
 
 // Edit set functions
+
 function editSet(e) {
     const setId = e.target.parentNode.id
     const editBox = document.querySelector('#set-list')
@@ -240,7 +241,7 @@ function edit(e) {
     editItem.innerHTML = `
     <form>
     <label for="${editItem.id}">${editItem.id}</label>
-    <input id="new-text" type="text" name="${editItem.id}" placeholder="${currentText}" />
+    <input id="new-text" type="text" name="${editItem.id}" value="${currentText}" />
     <input type="submit" value="Save" />
     </form>
     `
@@ -260,7 +261,7 @@ function createEditWindow(song) {
     const editBox = document.querySelector('#song-list')
     editBox.innerHTML = `
     <div id="${songId}">
-    <h3 id="title" name="Title" class="cursor"></h3>
+    <h3 id="title" class="cursor"></h3>
     <h5 id="author" class="cursor"></h5>
     <p id="key" class="cursor"></p>
     <p id="meter" class="cursor"></p>
