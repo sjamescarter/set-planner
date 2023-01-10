@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', init)
 
 const dbURL = "http://localhost:3000/";
-let activeSet;
+let activeSet, activeSong;
 
 function init() {
     modeHandler();
@@ -284,6 +284,7 @@ function editSong(e) {
         editBox.querySelector('#chords').textContent = data.chords
     })
     //.catch(error => alert(error))
+    activeSong = editBox
 }
 
 function edit(e) {
@@ -297,21 +298,24 @@ function edit(e) {
     <input type="submit" value="Save" />
     </form>
     `
-    const updateText = editItem.querySelector('#new-text').value
-    editItem.querySelector('form').addEventListener('click', updateSong)
-    // fetch(dbURL + songId, {
-    //     method: "PATCH",
-    //     headers: {
-    //         "Content-type": "application/json"
-    //     },
-    //     body: JSON.stringify({
-    //         songs: songs
-    //     })
-    // })
-    // .then(response => response.json())
-    // .then(data => data.songs.forEach((id) => getSong(id)))
+    activeSong.querySelectorAll('form').forEach(form => form.addEventListener('submit', updateSong))
 }
 
 function updateSong(e) {
-    console.log(e.target)
+    e.preventDefault();
+    const songId = e.target.parentNode.parentNode.id
+    const key = e.target.querySelector('label').textContent
+    const value = e.target.querySelector('input').value
+    
+    fetch(dbURL + songId, {
+        method: "PATCH",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify({
+            [key]: value
+        })
+    })
+    .then(response => response.json())
+    .then(data => editSong(data))
 }
