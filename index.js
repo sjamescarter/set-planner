@@ -40,20 +40,22 @@ function makeObject(e){
     const form = e.target
     const info = form.querySelectorAll('.info')
     const container = form.parentNode.parentNode
+    const id = `${form.parentNode.parentNode.id}/`
     const newObj = {}
     info.forEach((element) => newObj[element.name] = element.value)
     form.parentNode.removeChild(form)
-    
-    fetch(`${dbURL}${container.id}/`, {
-        method: "POST",
-        headers: {
-            "Content-type": "application/json"
-        },
-        body: JSON.stringify(newObj)
-    })
-    .then(response => response.json())
-    .then(data => populate(data, container))
-    .catch(error => alert(error))
+
+    postRequest(id, populate, newObj, container)
+    // fetch(dbURL + container.id, {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-type": "application/json"
+    //     },
+    //     body: JSON.stringify(newObj)
+    // })
+    // .then(response => response.json())
+    // .then(data => populate(data, container))
+    // .catch(error => alert(error))
 }
 
 function createNewSet(e) {
@@ -321,6 +323,19 @@ function getRequest(id, callback) {
     .then(response => response.json())
     .then(data => callback(data))
     .catch(error => console.log(error))
+}
+
+function postRequest(id, callback, obj, container) {
+    fetch(dbURL + id, {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(obj)
+    })
+    .then(response => response.json())
+    .then(data => callback(data, container))
+    .catch(error => alert(error))
 }
 
 function patchRequest(id, callback, key, value) {

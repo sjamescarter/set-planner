@@ -63,6 +63,14 @@
       "meter": "",
       "chords": "",
       "id": 8
+    },
+    {
+      "title": "Stand In Your Love",
+      "author": "Ethan Hulse, Josh Baldwin, Mark Harris, Rita Springer",
+      "key": "A",
+      "meter": "4/4",
+      "chords": "https://pnwchords.com/stand-in-your-love-bethel-music/",
+      "id": 9
     }
   ],
   "sets": [
@@ -106,6 +114,16 @@
       "venue": "Woodstock AG",
       "id": 5,
       "songs": []
+    },
+    {
+      "date": "2023-02-05",
+      "venue": "Woodstock AG",
+      "id": 6,
+      "songs": [
+        "songs/4",
+        "songs/5",
+        "songs/9"
+      ]
     }
   ]
 }
