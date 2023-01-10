@@ -35,29 +35,6 @@ function createNewSong(e) {
     editBox.appendChild(newSongForm)
 }
 
-function makeObject(e){
-    e.preventDefault()
-    const form = e.target
-    const info = form.querySelectorAll('.info')
-    const container = form.parentNode.parentNode
-    const id = `${form.parentNode.parentNode.id}/`
-    const newObj = {}
-    info.forEach((element) => newObj[element.name] = element.value)
-    form.parentNode.removeChild(form)
-
-    postRequest(id, populate, newObj, container)
-    // fetch(dbURL + container.id, {
-    //     method: "POST",
-    //     headers: {
-    //         "Content-type": "application/json"
-    //     },
-    //     body: JSON.stringify(newObj)
-    // })
-    // .then(response => response.json())
-    // .then(data => populate(data, container))
-    // .catch(error => alert(error))
-}
-
 function createNewSet(e) {
     clearHandler(e)
     const newSetForm = document.createElement('form')
@@ -104,13 +81,21 @@ function searchHandler() {
             e.preventDefault();
             clearHandler(e)
             const container = e.target.parentNode
+            const id = container.id
             const searchBy = e.target[0].value
             const searchText = e.target[1].value
-            
-            get(dbURL + container.id, searchBy, searchText, container)
+            const callback = (data) => data.forEach((element) => {
+                if(element[searchBy] === searchText){
+                    populate(element, container)
+                } else if(searchText === "") {
+                    populate(element, container)
+                }})
+
+            getRequest(id, callback)
     
             e.target.reset();
-    })})
+        })
+    })
 }
 
 function clearHandler(e) {
@@ -127,17 +112,17 @@ function deleteHandler(e) {
 
 // Callback Functions
 
-function get(URL, searchBy, searchText, container) {
-    fetch(URL)
-    .then(response => response.json())
-    .then(data => data.forEach((element) => {
-        if(element[searchBy] === searchText){
-            populate(element, container)
-        } else if(searchText === "") {
-            populate(element, container)
-        }
-    })) 
-    .catch(error => alert(error))
+function makeObject(e){
+    e.preventDefault()
+    const form = e.target
+    const info = form.querySelectorAll('.info')
+    const container = form.parentNode.parentNode
+    const id = `${form.parentNode.parentNode.id}/`
+    const newObj = {}
+    info.forEach((element) => newObj[element.name] = element.value)
+    form.parentNode.removeChild(form)
+
+    postRequest(id, populate, newObj, container)
 }
 
 function populate(element, container) {
@@ -187,15 +172,14 @@ function editSet(e) {
     `
     editBox.querySelector('#done').addEventListener('click', done)
     editBox.querySelector('#delete').addEventListener('click', deleteHandler)
-
-    fetch(dbURL + setId)
-    .then(response => response.json())
-    .then(data => {
+    
+    const callback = (data) => {
         editBox.querySelector('h3').textContent = data.venue
         editBox.querySelector('h5').textContent = data.date
         data.songs.forEach((songId) => getSong(songId))
-    })
-    //.catch(error => alert(error))
+    }
+    
+    getRequest(setId, callback)
     activeSet = editBox
 }
 
@@ -238,18 +222,8 @@ function deleteSong(e) {
 function updateSet(songs) {
     const setId = activeSet.querySelector('div').id
     activeSet.querySelector('ul').innerHTML = ""
-
-    fetch(dbURL + setId, {
-        method: "PATCH",
-        headers: {
-            "Content-type": "application/json"
-        },
-        body: JSON.stringify({
-            songs: songs
-        })
-    })
-    .then(response => response.json())
-    .then(data => data.songs.forEach((id) => getSong(id)))
+    const callback = (data) => data.songs.forEach((id) => getSong(id))
+    patchRequest(setId, callback, "songs", songs)
 }
 
 // Edit song functions

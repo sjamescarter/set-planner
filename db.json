@@ -58,7 +58,7 @@
     },
     {
       "title": "Hallelujah",
-      "author": "Lenard Cohen",
+      "author": "Leonard Cohen",
       "key": "",
       "meter": "",
       "chords": "",
@@ -82,7 +82,8 @@
         "songs/2",
         "songs/3",
         "songs/5",
-        "songs/1"
+        "songs/7",
+        "songs/4"
       ]
     },
     {
@@ -92,7 +93,9 @@
       "songs": [
         "songs/1",
         "songs/3",
-        "songs/6"
+        "songs/6",
+        "songs/5",
+        "songs/7"
       ]
     },
     {
@@ -113,7 +116,11 @@
       "date": "2023-01-29",
       "venue": "Woodstock AG",
       "id": 5,
-      "songs": []
+      "songs": [
+        "songs/5",
+        "songs/4",
+        "songs/6"
+      ]
     },
     {
       "date": "2023-02-05",
@@ -122,7 +129,18 @@
       "songs": [
         "songs/4",
         "songs/5",
-        "songs/9"
+        "songs/9",
+        "songs/3"
+      ]
+    },
+    {
+      "date": "2023-02-12",
+      "venue": "Woodstock AG",
+      "id": 7,
+      "songs": [
+        "songs/2",
+        "songs/3",
+        "songs/8"
       ]
     }
   ]
