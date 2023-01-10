@@ -65,12 +65,13 @@ function createNewSet(e) {
     <input type="date" name="date" class="info" /><br>
     <label for="venue">Venue</label><br>
     <input type="text" name="venue" class="info" required/><br>
-    <input type="hidden" name="songs" class="info" value="[]"/><br>
+    
     <input type="submit" value="Submit"/>
     `
     newSetForm.addEventListener('submit', makeObject)
     const editBox = document.querySelector('#set-list')
     editBox.appendChild(newSetForm)
+    // <input type="hidden" name="songs" class="info" value="[]"/><br></br>
 }
 
 // Handler Functions
@@ -317,5 +318,36 @@ function updateSong(e) {
         })
     })
     .then(response => response.json())
-    .then(data => editSong(data))
+    .then(data => createEditWindow(data))
+}
+
+function createEditWindow(song) {
+    const songId = `songs/${song.id}`
+    const editBox = document.querySelector('#song-list')
+    editBox.innerHTML = `
+    <div id="${songId}">
+    <h3 id="title" name="Title" class="cursor"></h3>
+    <h5 id="author" class="cursor"></h5>
+    <p id="key" class="cursor"></p>
+    <p id="meter" class="cursor"></p>
+    <p id="chords" class="cursor"></p>
+    <button id='delete'>Delete Song</button>
+    </div>
+    `
+    editBox.querySelector('h3').addEventListener('click', edit)
+    editBox.querySelector('h5').addEventListener('click', edit)
+    editBox.querySelectorAll('p').forEach(p => p.addEventListener('click', edit))
+    editBox.querySelector('button').addEventListener('click', deleteHandler)
+
+    fetch(dbURL + songId)
+    .then(response => response.json())
+    .then(data => {
+        editBox.querySelector('h3').textContent = data.title
+        editBox.querySelector('h5').textContent = data.author
+        editBox.querySelector('#key').textContent = data.key
+        editBox.querySelector('#meter').textContent = data.meter
+        editBox.querySelector('#chords').textContent = data.chords
+    })
+    //.catch(error => alert(error))
+    activeSong = editBox
 }
