@@ -119,12 +119,7 @@ function clearHandler(e) {
 function deleteHandler(e) {
     const objToDelete = e.target.parentNode
     const id = objToDelete.id
-    fetch(dbURL + id, {
-        method: "DELETE",
-        headers: {
-            "Content-type": "application/json"
-    }})
-    .catch(error => alert(error))
+    deleteRequest(id)
     objToDelete.parentNode.removeChild(objToDelete)
 }
 
@@ -259,37 +254,7 @@ function updateSet(songs) {
 
 function editSong(e) {
     const songId = e.target.parentNode.id
-    const editBox = document.querySelector('#song-list')
-    editBox.innerHTML = `
-    <div id="${songId}">
-    <h3 id="title" name="Title" class="cursor"></h3>
-    <h5 id="author" class="cursor"></h5>
-    <p id="key" class="cursor"></p>
-    <p id="meter" class="cursor"></p>
-    <p id="chords" class="cursor"></p>
-    <button id='done'>Done</button>
-    <button id='add'>Add to Set</button>
-    <button id='delete'>Delete Song</button>
-    </div>
-    `
-    editBox.querySelector('h3').addEventListener('click', edit)
-    editBox.querySelector('h5').addEventListener('click', edit)
-    editBox.querySelectorAll('p').forEach(p => p.addEventListener('click', edit))
-    editBox.querySelector('#done').addEventListener('click', done)
-    editBox.querySelector('#add').addEventListener('click', addSong)
-    editBox.querySelector('#delete').addEventListener('click', deleteHandler)
-
-    fetch(dbURL + songId)
-    .then(response => response.json())
-    .then(data => {
-        editBox.querySelector('h3').textContent = data.title
-        editBox.querySelector('h5').textContent = data.author
-        editBox.querySelector('#key').textContent = data.key
-        editBox.querySelector('#meter').textContent = data.meter
-        editBox.querySelector('#chords').textContent = data.chords
-    })
-    //.catch(error => alert(error))
-    activeSong = editBox
+    getRequest(songId, createEditWindow)
 }
 
 function edit(e) {
@@ -311,18 +276,7 @@ function updateSong(e) {
     const songId = e.target.parentNode.parentNode.id
     const key = e.target.querySelector('label').textContent
     const value = e.target.querySelector('input').value
-    
-    fetch(dbURL + songId, {
-        method: "PATCH",
-        headers: {
-            "Content-type": "application/json"
-        },
-        body: JSON.stringify({
-            [key]: value
-        })
-    })
-    .then(response => response.json())
-    .then(data => createEditWindow(data))
+    patchRequest(songId, createEditWindow, key, value)
 }
 
 function createEditWindow(song) {
@@ -340,23 +294,17 @@ function createEditWindow(song) {
     <button id='delete'>Delete Song</button>
     </div>
     `
+    editBox.querySelector('h3').textContent = song.title
+    editBox.querySelector('h5').textContent = song.author
+    editBox.querySelector('#key').textContent = song.key
+    editBox.querySelector('#meter').textContent = song.meter
+    editBox.querySelector('#chords').textContent = song.chords
     editBox.querySelector('h3').addEventListener('click', edit)
     editBox.querySelector('h5').addEventListener('click', edit)
     editBox.querySelectorAll('p').forEach(p => p.addEventListener('click', edit))
     editBox.querySelector('#done').addEventListener('click', done)
     editBox.querySelector('#add').addEventListener('click', addSong)
     editBox.querySelector('#delete').addEventListener('click', deleteHandler)
-
-    fetch(dbURL + songId)
-    .then(response => response.json())
-    .then(data => {
-        editBox.querySelector('h3').textContent = data.title
-        editBox.querySelector('h5').textContent = data.author
-        editBox.querySelector('#key').textContent = data.key
-        editBox.querySelector('#meter').textContent = data.meter
-        editBox.querySelector('#chords').textContent = data.chords
-    })
-    //.catch(error => alert(error))
     activeSong = editBox
 }
 
@@ -364,4 +312,36 @@ function done(e) {
     const songSearch = document.querySelector('#song-search-button')
     const setSearch = document.querySelector('#set-search-button')
     e.target.parentNode.parentNode.id === "song-list" ? songSearch.click() : setSearch.click()
+}
+
+// Fetch functions
+
+function getRequest(id, callback) {
+    fetch(dbURL + id)
+    .then(response => response.json())
+    .then(data => callback(data))
+    .catch(error => console.log(error))
+}
+
+function patchRequest(id, callback, key, value) {
+    fetch(dbURL + id, {
+        method: "PATCH",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify({
+            [key]: value
+        })
+    })
+    .then(response => response.json())
+    .then(data => callback(data))
+}
+
+function deleteRequest(id) {
+    fetch(dbURL + id, {
+        method: "DELETE",
+        headers: {
+            "Content-type": "application/json"
+    }})
+    .catch(error => alert(error))
 }
