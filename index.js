@@ -167,7 +167,7 @@ function createSetCard(set) {
     const setCard = document.createElement('li')
     setCard.id = `sets/${set.id}`
     setCard.innerHTML = `
-    <h3></h3>
+    <h3 class="cursor"></h3>
     <h5></h5>
     `
     setCard.querySelector('h3').textContent = set.venue
