@@ -41,13 +41,13 @@ header {
 ul {
     list-style-type: none;
     margin: 0;
-    padding: 10px;
+    padding: 0px;
     max-width: 80%;
 }
 
 li {
     padding: 10px;
-    margin: 0;
+    margin: 10px;
     border-style: solid;
     border-color: black;
     border-radius: 20px;
