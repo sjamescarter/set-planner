@@ -19,7 +19,7 @@ function createNewSong(e) {
     newSongForm.id = "songs/"
     newSongForm.innerHTML = `
     <label for="title">Song Title</label><br>
-    <input type="text" name="title" class="info"/><br>
+    <input type="text" name="title" class="info" required /><br>
     <label for="author">Author</label><br>
     <input type="text" name="author" class="info" /><br>
     <label for="key">Key</label><br>
@@ -64,8 +64,8 @@ function createNewSet(e) {
     <label for="date">Date</label><br>
     <input type="date" name="date" class="info" /><br>
     <label for="venue">Venue</label><br>
-    <input type="text" name="venue" class="info" /><br>
-    <input type="hidden" name="songs" class="info" value="[]"<br>
+    <input type="text" name="venue" class="info" required/><br>
+    <input type="hidden" name="songs" class="info" value="[]"/><br>
     <input type="submit" value="Submit"/>
     `
     newSetForm.addEventListener('submit', makeObject)

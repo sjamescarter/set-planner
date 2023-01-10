@@ -55,6 +55,14 @@
       "meter": "4/4",
       "chords": "https://www.worshipchords.net/guitar/maverick-city-music-/you-keep-on-getting-better-feat-majesty-rose",
       "id": 7
+    },
+    {
+      "title": "yeah",
+      "author": "Keaton Alan Case",
+      "key": "3",
+      "meter": "4/4",
+      "chords": "www.",
+      "id": 8
     }
   ],
   "sets": [
@@ -85,6 +93,24 @@
       "songs": [
         "songs/2"
       ]
+    },
+    {
+      "date": "2023-01-22",
+      "venue": "Woodstock AG",
+      "songs": "[]",
+      "id": 4
+    },
+    {
+      "date": "2023-01-09",
+      "venue": "Woodstock AG",
+      "songs": [
+        "songs/1",
+        "songs/2",
+        "songs/3",
+        "songs/5",
+        "songs/6"
+      ],
+      "id": 5
     }
   ]
 }
