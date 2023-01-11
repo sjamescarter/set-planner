@@ -10,7 +10,6 @@ function init() {
     document.getElementById("new-set").addEventListener('click', createNewSet);
     document.getElementById("song-search-button").click();
     document.getElementById("set-search-button").click();
-
 }
 
 function createNewSong(e) {
@@ -75,8 +74,8 @@ function createNewSet(e) {
 
 function searchHandler() {
     const searchBar = document.querySelectorAll('form')
-
     searchBar.forEach((element) => {
+        element.querySelector('select').addEventListener('change', parameterHandler)
         element.addEventListener('submit', (e) => {
             e.preventDefault();
             clearHandler(e)
@@ -92,10 +91,32 @@ function searchHandler() {
                 }})
 
             getRequest(id, callback)
-    
-            e.target.reset();
         })
     })
+}
+
+function parameterHandler() {
+    const searchBox = this.parentNode.querySelector('input')
+    switch(this.value) {
+        case 'title': 
+        searchBox.placeholder = 'Song Title'
+        break;
+        case 'author': 
+        searchBox.placeholder = 'Author'
+        break;
+        case 'key': 
+        searchBox.placeholder = 'C, Cm...'
+        break;
+        case 'meter': 
+        searchBox.placeholder = '4/4, 3/4...'
+        break;
+        case 'date': 
+        searchBox.placeholder = 'YYYY-MM-DD'
+        break;
+        case 'venue': 
+        searchBox.placeholder = 'Venue Name'
+        break;
+    }
 }
 
 function clearHandler(e) {
