@@ -95,6 +95,7 @@ function searchHandler() {
     })
 }
 
+
 function parameterHandler() {
     const searchBox = this.parentNode.querySelector('input')
     switch(this.value) {
@@ -111,9 +112,10 @@ function parameterHandler() {
         searchBox.placeholder = '4/4, 3/4...'
         break;
         case 'date': 
-        searchBox.placeholder = 'YYYY-MM-DD'
+        searchBox.type = 'date'
         break;
         case 'venue': 
+        searchBox.type = 'text'
         searchBox.placeholder = 'Venue Name'
         break;
     }
