@@ -4,9 +4,12 @@ Set Planner is an SPA designed to keep track of musical repertoire and provide a
 
 ## Features
 
-- Add songs/sets
-- Edit songs/sets
-- Search songs/sets
-- Sort songs/sets
-- Plan Mode
-- Live Mode
+- Create New Song
+- Create New Set
+- Edit Song
+- Edit Set
+- Add Song to Set
+- Search Songs
+- Search Sets
+- Delete Song
+- Delete Set
