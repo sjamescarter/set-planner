@@ -98,6 +98,7 @@ function searchHandler() {
 
 function parameterHandler() {
     const searchBox = this.parentNode.querySelector('input')
+    searchBox.value = ""
     switch(this.value) {
         case 'title': 
         searchBox.placeholder = 'Song Title'

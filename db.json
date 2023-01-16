@@ -57,14 +57,6 @@
       "id": 7
     },
     {
-      "title": "Hallelujah",
-      "author": "Leonard Cohen",
-      "key": "",
-      "meter": "",
-      "chords": "",
-      "id": 8
-    },
-    {
       "title": "Stand In Your Love",
       "author": "Ethan Hulse, Josh Baldwin, Mark Harris, Rita Springer",
       "key": "A",
@@ -76,9 +68,17 @@
       "title": "How He Loves",
       "author": "John-Mark McMillan",
       "key": "C",
-      "meter": "4/4",
+      "meter": "3/4",
       "chords": "https://worshipchords.com/how-he-loves-chords/",
       "id": 10
+    },
+    {
+      "title": "Great is the Lord",
+      "author": "HouseFires",
+      "key": "G",
+      "meter": "6/8",
+      "chords": "https://www.worshipchords.net/guitar/housefires/great-is-the-lord",
+      "id": 11
     }
   ],
   "sets": [
@@ -91,7 +91,7 @@
         "songs/3",
         "songs/5",
         "songs/7",
-        "songs/4"
+        "songs/6"
       ]
     },
     {
@@ -99,12 +99,12 @@
       "venue": "NCF",
       "date": "2023-01-13",
       "songs": [
-        "songs/3",
-        "songs/1",
-        "songs/6",
-        "songs/5",
         "songs/7",
-        "songs/2"
+        "songs/2",
+        "songs/3",
+        "songs/7",
+        "songs/2",
+        "songs/5"
       ]
     },
     {
@@ -129,6 +129,16 @@
         "songs/5",
         "songs/4",
         "songs/6"
+      ]
+    },
+    {
+      "date": "2023-02-05",
+      "venue": "Woodstock AG",
+      "id": 6,
+      "songs": [
+        "songs/1",
+        "songs/2",
+        "songs/3"
       ]
     }
   ]
