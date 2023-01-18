@@ -87,11 +87,10 @@
       "venue": "Woodstock AG",
       "date": "2023-01-08",
       "songs": [
-        "songs/2",
         "songs/3",
-        "songs/5",
-        "songs/7",
-        "songs/6"
+        "songs/2",
+        "songs/1",
+        "songs/4"
       ]
     },
     {
@@ -102,9 +101,8 @@
         "songs/7",
         "songs/2",
         "songs/3",
-        "songs/7",
-        "songs/2",
-        "songs/5"
+        "songs/5",
+        "songs/7"
       ]
     },
     {
@@ -129,16 +127,6 @@
         "songs/5",
         "songs/4",
         "songs/6"
-      ]
-    },
-    {
-      "date": "2023-02-05",
-      "venue": "Woodstock AG",
-      "id": 6,
-      "songs": [
-        "songs/1",
-        "songs/2",
-        "songs/3"
       ]
     }
   ]

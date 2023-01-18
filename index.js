@@ -131,7 +131,7 @@ function deleteHandler(e) {
     const objToDelete = e.target.parentNode
     const id = objToDelete.id
     deleteRequest(id)
-    objToDelete.parentNode.removeChild(objToDelete)
+    objToDelete.remove()
 }
 
 // Callback Functions
@@ -144,7 +144,7 @@ function makeObject(e){
     const id = `${form.parentNode.parentNode.id}/`
     const newObj = {}
     info.forEach((element) => newObj[element.name] = element.value)
-    form.parentNode.removeChild(form)
+    form.remove()
 
     postRequest(id, populate, newObj, container)
 }
@@ -238,7 +238,7 @@ function addSong(e) {
 
 function deleteSong(e) {
     const song = e.target.parentNode
-    song.parentNode.removeChild(song)
+    song.remove()
     const songs = []
     activeSet.querySelectorAll('h4').forEach((element) => songs.push(`songs/${element.id}`))
     updateSet(songs)
