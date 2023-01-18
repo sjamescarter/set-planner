@@ -301,10 +301,8 @@ function createEditWindow(song) {
     editBox.querySelector('#key').textContent = song.key
     editBox.querySelector('#meter').textContent = song.meter
     editBox.querySelector('#chords').textContent = song.chords
-
-    editBox.querySelector('h3').addEventListener('click', edit)
-    editBox.querySelector('h5').addEventListener('click', edit)
-    editBox.querySelectorAll('p').forEach(p => p.addEventListener('click', edit))
+    
+    editBox.querySelectorAll('#title, #author, p').forEach(content => content.addEventListener('click', edit))
     editBox.querySelector('#done').addEventListener('click', done)
     editBox.querySelector('#add').addEventListener('click', addSong)
     editBox.querySelector('#delete').addEventListener('click', deleteHandler)
