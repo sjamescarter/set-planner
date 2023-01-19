@@ -201,18 +201,11 @@ function editSet(e) {
     const callback = (data) => {
         editBox.querySelector('h3').textContent = data.venue
         editBox.querySelector('h5').textContent = data.date
-        data.songs.forEach((songId) => getSong(songId))
+        data.songs.forEach((songId) => getRequest(songId, displaySong))
     }
     
     getRequest(setId, callback)
     activeSet = editBox
-}
-
-function getSong(songId) {
-    fetch(`${dbURL}${songId}`)
-    .then(response => response.json())
-    .then(data => displaySong(data))
-    .catch(error => alert(error))
 }
 
 function displaySong(data) {
@@ -247,7 +240,7 @@ function deleteSong(e) {
 function updateSet(songs) {
     const setId = activeSet.querySelector('div').id
     activeSet.querySelector('ul').innerHTML = ""
-    const callback = (data) => data.songs.forEach((id) => getSong(id))
+    const callback = (data) => data.songs.forEach((id) => getRequest(id, displaySong))
     patchRequest(setId, callback, "songs", songs)
 }
 
